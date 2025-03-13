@@ -177,8 +177,11 @@ fun BillForm(
                             imageVector = Icons.Default.Remove,
                             onClick = {
                                 splitByState.value =
-                                    if (splitByState.value > 1) splitByState.value - 1
-                                else 1
+                                    if (splitByState.value > 1) splitByState.value - 1 else 1
+                                totalPerPersonState.value =
+                                    calculateTotalPerPerson(totalBill = totalBillState.value.toDouble(),
+                                        splitBy = splitByState.value,
+                                        tipPercentage = tipPercentage)
                             })
                         Text(text = "${splitByState.value}",
                             modifier = Modifier
@@ -190,6 +193,11 @@ fun BillForm(
                             onClick = {
                                 if (splitByState.value < range.last){
                                     splitByState.value = splitByState.value + 1
+
+                                    totalPerPersonState.value =
+                                        calculateTotalPerPerson(totalBill = totalBillState.value.toDouble(),
+                                            splitBy = splitByState.value,
+                                            tipPercentage = tipPercentage)
                                 }
                             })
 
